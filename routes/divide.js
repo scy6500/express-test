@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *   /multiply:
+ *   /divide:
  *     post:
  *       summary: 숫자 두 개를 나누는 API
  *       requestBody:
@@ -39,7 +39,7 @@ const router = express.Router();
  *                   message:
  *                     type: string
  */
-router.post("/muldividetiply", (req, res) => {
+router.post("/divide", (req, res) => {
   const { first_num, second_num } = req.body;
   if (
     typeof first_num !== "number" ||
