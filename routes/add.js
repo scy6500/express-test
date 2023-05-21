@@ -39,14 +39,14 @@ const router = express.Router();
  *                   message:
  *                     type: string
  */
-router.post("", (req, res) => {
+router.post("/add", (req, res) => {
   const { first_num, second_num } = req.body;
   if (typeof first_num !== "number" || typeof second_num !== "number") {
     return res.status(400).json({ message: "invalid param" });
   }
 
-  const sum = first_num + second_num;
-  return res.json({ result: sum });
+  const result = first_num + second_num;
+  return res.json({ result });
 });
 
 module.exports = router;
