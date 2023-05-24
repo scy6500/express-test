@@ -1,4 +1,5 @@
 const express = require("express");
+const { addBody } = require("../joi");
 
 const router = express.Router();
 
@@ -40,11 +41,11 @@ const router = express.Router();
  *                     type: string
  */
 router.post("/add", (req, res) => {
-  const { first_num, second_num } = req.body;
-  if (typeof first_num !== "number" || typeof second_num !== "number") {
+  const validData = addBody.validate(req.body);
+  if (validData.error) {
     return res.status(400).json({ message: "invalid param" });
   }
-
+  const { first_num, second_num } = req.body;
   const result = first_num + second_num;
   return res.json({ result });
 });

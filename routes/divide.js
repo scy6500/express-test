@@ -1,4 +1,5 @@
 const express = require("express");
+const { divideBody } = require("../joi");
 
 const router = express.Router();
 
@@ -40,15 +41,11 @@ const router = express.Router();
  *                     type: string
  */
 router.post("/divide", (req, res) => {
-  const { first_num, second_num } = req.body;
-  if (
-    typeof first_num !== "number" ||
-    typeof second_num !== "number" ||
-    second_num === 0
-  ) {
+  const validData = divideBody.validate(req.body);
+  if (validData.error) {
     return res.status(400).json({ message: "invalid param" });
   }
-
+  const { first_num, second_num } = req.body;
   const result = first_num / second_num;
   return res.json({ result });
 });
